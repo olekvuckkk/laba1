@@ -1,0 +1,44 @@
+class InternetOperator:
+    def __init__(self, name, num_subscribers, tariff):
+        self.name = name
+        self.num_subscribers = num_subscribers
+        self.tariff = tariff
+
+    def calculate_revenue(self):
+        return self.num_subscribers * self.tariff
+
+    def display_info(self):
+        print(f"Название: {self.name}")
+        print(f"Количество пользователей: {self.num_subscribers}")
+        print(f"Цена тарифа: {self.tariff}")
+        print(f"Общая выручка: {self.calculate_revenue()}")
+
+
+def main():
+    name = input("Введите название компании: ")
+
+    while True:
+        try:
+            tariff = float(input("Введите тариф: "))
+            if tariff < 0:
+                raise ValueError("Тариф не может быть отрицательным.")
+            break
+        except ValueError as e:
+            print(f"Ошибка: {e} Введите положительное число.")
+
+    while True:
+        try:
+            num_subscribers = input("Введите количество пользователей: ")
+            if not num_subscribers.isdigit() or int(num_subscribers) < 0:
+                raise ValueError("Введите целое положительное число.")
+            num_subscribers = int(num_subscribers)
+            break
+        except ValueError as e:
+            print(f"Ошибка: {e}")
+
+    operator = InternetOperator(name, num_subscribers, tariff)
+    operator.display_info()
+
+
+if __name__ == "__main__":
+    main()
